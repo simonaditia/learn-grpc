@@ -52,8 +52,11 @@ func (p *ProductService) GetProductsHardcoded(context.Context, *productPb.Empty)
 	return products, nil
 }
 
-func (p *ProductService) GetProducts(context.Context, *productPb.Empty) (*productPb.Products, error) {
+func (p *ProductService) GetProducts(ctx context.Context, pageParam *productPb.Page) (*productPb.Products, error) {
 	var page int64 = 1
+	if pageParam.GetPage() != 0 {
+		page = pageParam.GetPage()
+	}
 
 	var pagination pagingPb.Pagination
 	var products []*productPb.Product

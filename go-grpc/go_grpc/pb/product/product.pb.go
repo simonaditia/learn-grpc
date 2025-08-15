@@ -327,6 +327,50 @@ func (x *Status) GetStatus() uint32 {
 	return 0
 }
 
+type Page struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          *int64                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Page) Reset() {
+	*x = Page{}
+	mi := &file_product_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Page) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Page) ProtoMessage() {}
+
+func (x *Page) ProtoReflect() protoreflect.Message {
+	mi := &file_product_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Page.ProtoReflect.Descriptor instead.
+func (*Page) Descriptor() ([]byte, []int) {
+	return file_product_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Page) GetPage() int64 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
 var File_product_proto protoreflect.FileDescriptor
 
 const file_product_proto_rawDesc = "" +
@@ -350,9 +394,12 @@ const file_product_proto_rawDesc = "" +
 	"\x02Id\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\" \n" +
 	"\x06Status\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\rR\x06status2\x82\x02\n" +
-	"\x0eProductService\x120\n" +
-	"\vGetProducts\x12\x0e.go_grpc.Empty\x1a\x11.go_grpc.Products\x12+\n" +
+	"\x06status\x18\x01 \x01(\rR\x06status\"(\n" +
+	"\x04Page\x12\x17\n" +
+	"\x04page\x18\x01 \x01(\x03H\x00R\x04page\x88\x01\x01B\a\n" +
+	"\x05_page2\x81\x02\n" +
+	"\x0eProductService\x12/\n" +
+	"\vGetProducts\x12\r.go_grpc.Page\x1a\x11.go_grpc.Products\x12+\n" +
 	"\n" +
 	"GetProduct\x12\v.go_grpc.Id\x1a\x10.go_grpc.Product\x12.\n" +
 	"\rCreateProduct\x12\x10.go_grpc.Product\x1a\v.go_grpc.Id\x122\n" +
@@ -371,7 +418,7 @@ func file_product_proto_rawDescGZIP() []byte {
 	return file_product_proto_rawDescData
 }
 
-var file_product_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_product_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_product_proto_goTypes = []any{
 	(*Empty)(nil),                 // 0: go_grpc.Empty
 	(*Products)(nil),              // 1: go_grpc.Products
@@ -379,13 +426,14 @@ var file_product_proto_goTypes = []any{
 	(*Category)(nil),              // 3: go_grpc.Category
 	(*Id)(nil),                    // 4: go_grpc.Id
 	(*Status)(nil),                // 5: go_grpc.Status
-	(*pagination.Pagination)(nil), // 6: go_grpc.Pagination
+	(*Page)(nil),                  // 6: go_grpc.Page
+	(*pagination.Pagination)(nil), // 7: go_grpc.Pagination
 }
 var file_product_proto_depIdxs = []int32{
-	6, // 0: go_grpc.Products.pagination:type_name -> go_grpc.Pagination
+	7, // 0: go_grpc.Products.pagination:type_name -> go_grpc.Pagination
 	2, // 1: go_grpc.Products.data:type_name -> go_grpc.Product
 	3, // 2: go_grpc.Product.category:type_name -> go_grpc.Category
-	0, // 3: go_grpc.ProductService.GetProducts:input_type -> go_grpc.Empty
+	6, // 3: go_grpc.ProductService.GetProducts:input_type -> go_grpc.Page
 	4, // 4: go_grpc.ProductService.GetProduct:input_type -> go_grpc.Id
 	2, // 5: go_grpc.ProductService.CreateProduct:input_type -> go_grpc.Product
 	2, // 6: go_grpc.ProductService.UpdateProduct:input_type -> go_grpc.Product
@@ -407,13 +455,14 @@ func file_product_proto_init() {
 	if File_product_proto != nil {
 		return
 	}
+	file_product_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_product_proto_rawDesc), len(file_product_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
